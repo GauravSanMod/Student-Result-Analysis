@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title%} Prediction {% endblock title%}
+{% block body%}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Results</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/predict">Get Prediction</a>
+                </li>
+            </ul>
+            <ul class='navbar-nav ml-auto'>
+                <li class = 'nav-item'>
+                    <a class='nav-link' > {{current_user.name}}</a>
+                </li>
+                <li class = 'nav-item'>
+                    <a class='nav-link' href = "/logout" > Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container" id="predict">
+
+<form method='POST' class="well form-horizontal">
+<legend>For prediction enter total marks of given subject Internal + External</legend>
+
+<label for="java">Enter Java Total Marks:</label>
+<input type="number" id="java" name="java" min=0 max=75 required><br>
+
+<label for="python">Enter Python Total Marks:</label>
+<input type="number" id="python" name="python" min=0 max=75 required><br>
+
+<label for="spm">Enter SPM Total Marks:</label>
+<input type="number" id="spm" name="spm" min=0 max=75 required><br>
+
+<label for="ot">Enter OT Total Marks:</label>
+<input type="number" id="ot" name="ot" min=0 max=75 required><br>
+
+<label for="ait">Enter AIT Total Marks:</label>
+<input type="number" id="ait" name="ait" min=0 max=75 required><br>
+
+<label for="adbms">Enter ADBMS Total Marks:</label>
+<input type="number" id="adbms" name="adbms" min=0 max=75 required><br>
+
+<input type="submit" value="Submit">
+</form>
+</div>
+{% endblock body%}

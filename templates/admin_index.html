@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title%} Admin Dashboard{% endblock title%}
+{% block body%}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/admin_index">Admin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/admin_index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/view_result">View Results</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/m_intervention">Manage Intervention</a>
+                    </li>
+                </ul>
+                <ul class='navbar-nav ml-auto'>
+                    <li class = 'nav-item'>
+                        <a class='nav-link' href = "/admin_logout" > Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="about-area about-five">
+        <div class="container mb-2">
+        <div class="row align-items-center">
+        <div class="col-lg-6 col-12">
+        <div class="about-image-five">
+        <img src="static\images\ai-technology-microchip-background-digital-transformation-concept.jpg" alt="home" width="650px" height="557px">
+        </div>
+        </div>
+        <div class="col-lg-6 col-12">
+        <div class="about-five-content">
+        <h2 class="small-title text-lg">My Story</h2>
+        <h5 class="main-title fw-bold"> As I was learning new ML algorithm in class
+            I used to think how this algorithm will help me and my mates.
+            As semester 3rd was critical comparing to previous ones everybody was tensed about passing that's why
+            I used to develop this algorithm and try to solve this problem.    </h5><br>
+        </section>
+        {% endblock body%}

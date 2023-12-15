@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- CSS Files -->
+<link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/contacts/contact-4/assets/css/contact-4.css">
+<link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/abouts/about-5/assets/css/about-5.css" />
+    <title>Index</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Results</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">Contact Us</a>
+                    </li>
+                    {%if current_user.is_authenticated%}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/predict">Get Prediction</a>
+                    </li>
+                </ul>
+                    <ul class='navbar-nav ml-auto'>
+                    <li class = 'nav-item'>
+                        <a class='nav-link'>{{current_user.name}}</a>
+                    </li>
+                    <li class = 'nav-item'>
+                        <a class='nav-link' href = "/logout" > Logout</a>
+                    </li>
+                    {% else %}
+                </ul>
+                    <ul class='navbar-nav ml-auto'>
+                    <li class = 'nav-item'>
+                        <a class='nav-link' href = "/login" > Login</a>
+                    </li>
+                    <li class = 'nav-item'>
+                        <a class='nav-link' href = "/admin_login" > Admin Login</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+
+    <section id="hero-area" class="header-area header-eight">
+        <div class="container mb-2">
+        <div class="row align-items-center">
+        <div class="col-lg-6 col-md-12 col-12">
+        <div class="header-content">
+        <h1>Welcome to Our Website for your Prediction of Sem3 in MCA</h1>
+        <p>
+        We provide nearly correct prediction for your upcoming semester 
+        just you have to provide previous semester marks.
+        Hope you enjoyed.
+        </p>
+        {%if current_user.is_authenticated%}
+        <button id="Enter" type="button" onclick="window.location.href = '/predict' ; " class="btn btn-outline-dark">Get Prediction</button>
+        {%else%}
+        <button id="Enter" type="button" onclick="window.location.href = '/register' ; " class="btn btn-outline-dark">Sign Up Now</button>
+        {%endif%}
+        </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-12">
+        <div class="header-image">
+        <img src="data:image/png;base64, {{encoded_img}}" alt="home" width='696px' height="557px">
+        </div>
+        </div>
+        </div>
+        </div>
+    </section>
+    <br>
+    <section class="about-area about-five">
+        <div class="container mb-2">
+        <div class="row align-items-center">
+        <div class="col-lg-6 col-12">
+        <div class="about-image-five">
+        <img src="static\images\ai-technology-microchip-background-digital-transformation-concept.jpg" alt="home" width="650px" height="557px">
+        </div>
+        </div>
+        <div class="col-lg-6 col-12">
+        <div class="about-five-content">
+        <h2 class="small-title text-lg">My Story</h2>
+        <h5 class="main-title fw-bold"> As I was learning new ML algorithm in class
+            I used to think how this algorithm will help me and my mates.
+            As semester 3rd was critical comparing to previous ones everybody was tensed about passing that's why 
+            I used to develop this algorithm and try to solve this problem.    </h5><br>
+            <button id="Enter" type="button" onclick="window.location.href = '/about' ; " class="btn btn-outline-dark">Know More</button>
+        </section>
+    
+<hr>
+<footer class="text-center text-white" style="background-color: #f1f1f1;">
+    <!-- Grid container -->
+    <div class="container pt-4">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="https://www.facebook.com/gaurav.modak.71?mibextid=ZbWKwL"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+
+        <!-- Instagram -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="https://instagram.com/gaurav_modak_?igshid=NzZlODBkYWE4Ng=="
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-instagram"></i
+        ></a>
+  
+        <!-- Linkedin -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="https://www.linkedin.com/in/gaurav-modak-2001bd"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <!-- Github -->
+        <a
+          class="btn btn-link btn-floating btn-lg text-dark m-1"
+          href="https://github.com/GauravSanMod"
+          role="button"
+          data-mdb-ripple-color="dark"
+          ><i class="fab fa-github"></i
+        ></a>
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2023 Copyright: Student Result Analysis
+    </div>
+    <!-- Copyright -->
+  </footer>
+</body>
+
+</html>

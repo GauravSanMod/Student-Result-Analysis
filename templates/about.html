@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block  title %} About Us {% endblock  title %}
+{% block body%}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="/">Results</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/contact">Contact Us</a>
+          </li>
+          {%if current_user.is_authenticated%}
+          <li class="nav-item">
+              <a class="nav-link" href="/predict">Get Prediction</a>
+          </li>
+      </ul>
+      <ul class='navbar-nav ml-auto'>
+          <li class = 'nav-item'>
+              <a class='nav-link'>{{current_user.name}}</a>
+          </li>
+          <li class = 'nav-item'>
+              <a class='nav-link' href = "/logout" > Logout</a>
+          </li>
+      </ul>
+          {% else %}
+    </ul>
+          <ul class='navbar-nav ml-auto'>
+          <li class = 'nav-item'>
+              <a class='nav-link' href = "/login" > Login</a>
+          </li>
+          <li class = 'nav-item'>
+              <a class='nav-link' href = "/admin_login" > Admin Login</a>
+          </li>
+      </ul>
+      {% endif %}
+      </div>
+  </div>
+</nav>
+<!-- About 5 - Bootstrap Brain Component -->
+<section class="py-3 py-md-5 py-xl-8">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-10 col-lg-8">
+        <h3 class="fs-5 mb-2 text-secondary text-uppercase">About</h3>
+        <p>At Student Result Analysis, we are driven by a commitment to revolutionize education through innovation and technology. 
+          Our team envisions a future where every student's academic journey is supported by cutting-edge tools that empower educators and inspire learners.
+           Guided by a passion for excellence and a belief in the transformative power of education, we strive to create a dynamic platform that fosters collaboration, harnesses the potential of data analytics, and ultimately contributes to the evolution of educational practices. 
+           Our mission is to build bridges between technology and education, making a lasting impact on the way we analyze, understand, and enhance student results.
+           Together, we're shaping the future of learning.
+        </p>
+        <p>Our Client For This Project Is IICMR<br>To know more about Client click the button below
+        </p>
+        <a href="http://iicmrmca.org/"><button type="button" class="btn btn-lg btn-primary mb-3 mb-md-4 mb-xl-5">Know More</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="container overflow-hidden">
+    <div class="row gy-4 gy-lg-0">
+      <div class="col-12 col-lg-6">
+        <article>
+          <div class="card border-0">
+            <img class="card-img-top img-fluid m-0" loading="lazy" src="static\images\vision.jpg" alt="">
+            <div class="card-body border bg-white p-4">
+              <div class="entry-header mb-3">
+                <h2 class="card-title entry-title h4 mb-0">
+                  <a class="link-dark text-decoration-none" href="#!">Our Vision</a>
+                </h2>
+              </div>
+              <p class="card-text entry-summary text-secondary mb-3">Our vision for the Student Result Analysis Project is to empower educators, students, and administrators with a comprehensive and intuitive platform that transforms raw academic data into actionable insights. 
+                 By leveraging advanced analytics and visualization tools, we aim to provide a holistic understanding of student performance,
+                  identify areas for improvement, and foster data-driven decision-making in educational institutions. Through this initiative, we aspire to enhance the 
+                learning experience, support personalized education, and contribute to the continuous improvement of educational outcomes.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="col-12 col-lg-6">
+        <article>
+          <div class="card border-0">
+            <img class="card-img-top img-fluid m-0" loading="lazy" src="static\images\approach.jpg" alt="">
+            <div class="card-body border bg-white p-4">
+              <div class="entry-header mb-3">
+                <h2 class="card-title entry-title h4 mb-0">
+                  <a class="link-dark text-decoration-none" href="#!">Our Approach</a>
+                </h2>
+              </div>
+              <p class="card-text entry-summary text-secondary mb-3">In the approach section for your project utilizing an SVM classifier with a Radial Basis Function kernel
+                <br>Approach:
+                <br>1.Data Collection<br>
+                2.Data Preprocessing<br>
+                3.Train-Test Split<br>
+                4.Model Selection<br>
+                5.Feature Scaling<br>
+                6.Model Training<br>
+                7.Model Evaluation<br>
+                8.Iterative Refinement<br>
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{%endblock body%}
