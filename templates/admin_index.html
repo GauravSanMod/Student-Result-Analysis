@@ -21,11 +21,16 @@
                         <a class="nav-link" href="/m_intervention">Manage Intervention</a>
                     </li>
                 </ul>
+                {%if current_user.is_authenticated%}
                 <ul class='navbar-nav ml-auto'>
+                    <li class = 'nav-item'>
+                        <a class='nav-link'>{{current_user.name}}</a>
+                    </li>
                     <li class = 'nav-item'>
                         <a class='nav-link' href = "/admin_logout" > Logout</a>
                     </li>
                 </ul>
+                {%endif%}
             </div>
         </div>
     </nav>

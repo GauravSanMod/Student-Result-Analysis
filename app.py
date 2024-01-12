@@ -11,23 +11,25 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, curren
 model = pickle.load(open("svm_model.pkl", "rb"))
 
 #secret Key generator
-def generate_secret_key(length=32):
+def generate_secret_key(length):
     return secrets.token_hex(length)
 secret_key = generate_secret_key(64)
 
 app = Flask(__name__)
+
+app.app_context().push() # use to push application context onto context stack
+
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
+app.config['MAIL_PORT'] = 587 #465 is used with ssl
 app.config['MAIL_USERNAME'] = 'gaurav8bp2@gmail.com'
 app.config['MAIL_PASSWORD'] = 'sdfc almv ixsn usfe'
-app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = False # tls is preferred over ssl 
+app.config['MAIL_USE_TLS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['SECRET_KEY'] = secret_key #production change
-
 #Pdf size
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024 #5MB
-app.app_context().push()
+
 
 #instance of mail
 mail = Mail(app)
@@ -39,16 +41,6 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-
-@login_manager.user_loader
-def load_user(user_id):
-    Student = student.query.get(int(user_id))
-    if Student:
-        return Student
-    admin = Admin.query.get(int(user_id))
-    if admin:
-        return admin
-    return None #User Not Found
 
 @login_manager.unauthorized_handler
 def unauthorized():
@@ -71,9 +63,9 @@ class student(db.Model, UserMixin):
 
     def check_password(self, password):
         return bcrypt.checkpw(password.encode('utf-8'),self.password.encode('utf-8'))
-    
+
     def get_id(self):
-        return str(self.student_id)
+        return f"student_{self.student_id}"
 
 
 #Admin Table
@@ -94,7 +86,7 @@ class Admin(db.Model, UserMixin):
         return bcrypt.checkpw(password.encode('utf-8'),self.password.encode('utf-8'))
 
     def get_id(self):
-        return str(self.admin_id)
+        return f"admin_{self.admin_id}"
 
 
 #Result Table
@@ -133,6 +125,17 @@ class Intervention(db.Model):
         self.admin_email = admin_email
         self.status = status
 
+
+# User loader callback
+@login_manager.user_loader
+def load_user(user_id):
+    table_name, actual_user_id = user_id.split("_",1)
+    if table_name == 'student':
+        return student.query.get(int(actual_user_id))
+    elif table_name == 'admin':
+        return Admin.query.get(int(actual_user_id))
+    return None
+
 #Home Route
 @app.route('/')
 def index():
@@ -147,7 +150,7 @@ def index():
     plt.xlabel("Predicted")
     plt.ylabel("Actual")
     plt.title("Confusion_Matrix")
-    img_data = io.BytesIO() #convert plot to a base64 encoding image
+    img_data = io.BytesIO() 
     plt.savefig(img_data, format='png')
     img_data.seek(0)
     encoded_img = base64.b64encode(img_data.read()).decode('utf-8')
@@ -168,7 +171,7 @@ def contact():
         return "Email Sent Successfully"
     else:
         return render_template("contact.html")
-    
+
 #Home About
 @app.route('/about')
 def about():
@@ -277,7 +280,7 @@ def admin_register():
         email = request.form['email']
         college = request.form['college']
         password = request.form['password']
-        confirm_password = request.form['confirm_password']
+        confirm_password = request.form['c_password']
         if password == confirm_password:
             new_user = Admin(name=name, email=email, college=college, password=password)
             db.session.add(new_user)
@@ -306,7 +309,7 @@ def m_intervention():
         db.session.commit()
         subject = request.form['subject']
         pdf_file = request.files.get('file')
-        msg = Message(subject=subject, sender=current_user.name, recipients=[str(student_email)])
+        msg = Message(subject=subject, sender=admin_email, recipients=[str(student_email)])
         if pdf_file and pdf_file.filename.endswith('.pdf'):
             msg.attach(pdf_file.filename, 'application/pdf', pdf_file.read())
         suggestion = request.form['suggest']
@@ -329,4 +332,4 @@ def delay():
     return render_template("delay.html")
 
 if __name__ == "__main__":
-    app.run(debug=False)#production change
+    app.run(debug=True)#production change
