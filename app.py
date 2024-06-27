@@ -22,7 +22,7 @@ app.app_context().push() # use to push application context onto context stack
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587 #465 is used with ssl
 app.config['MAIL_USERNAME'] = 'gaurav8bp2@gmail.com'
-app.config['MAIL_PASSWORD'] = 'sdfc almv ixsn usfe'
+app.config['MAIL_PASSWORD'] = # put yours
 app.config['MAIL_USE_SSL'] = False # tls is preferred over ssl 
 app.config['MAIL_USE_TLS'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
